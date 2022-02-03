@@ -113,3 +113,22 @@ hist(EPI_WATER_H_na_free[EPI_WATER_H_na_free$GEO_subregion == "Southern Africa",
 lines(density(EPI_WATER_H_na_free[EPI_WATER_H_na_free$GEO_subregion == "Southern Africa", "WATER_H"], bw=5, kernel="gaussian"))
 
 
+
+GPW_data = read.csv(file.choose(), header=TRUE)
+colnames(GPW_data)
+Mean_Extent_area = GPW_data[!is.na(GPW_data$Mean.Extent..sq.km.),]
+#Grabbing only non NA's and non "NA" rows for WATER_H column. Converting from char to numeric type
+Mean_Extent_area = Mean_Extent_area[!(Mean_Extent_area$Mean.Extent..sq.km. == "NA" | Mean_Extent_area$Mean.Extent..sq.km. == ""), "Mean.Extent..sq.km."]
+Mean_Extent_area = as.numeric(gsub(",","",Mean_Extent_area))
+
+hist(Mean_Extent_area)
+boxplot(Mean_Extent_area)
+
+Mean_Extent_pop = GPW_data[!is.na(GPW_data$Mean.Point..pop.),]
+#Grabbing only non NA's and non "NA" rows for WATER_H column. Converting from char to numeric type
+Mean_Extent_pop = Mean_Extent_pop[!(Mean_Extent_pop$Mean.Point..pop. == "NA" | Mean_Extent_pop$Mean.Point..pop. == ""), "Mean.Point..pop."]
+Mean_Extent_pop = as.numeric(gsub(",","",Mean_Extent_pop))
+
+hist(Mean_Extent_pop)
+boxplot(Mean_Extent_pop)
+
